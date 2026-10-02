@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matías Cortés · Piano</title>
+<meta name="description" content="Repertorio de piano de Matías Cortés">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:        #FBF7F2;
+    --bg-alt:    #F3ECE3;
+    --ink:       #2E2A24;
+    --ink-soft:  #7A7167;
+    --accent:    #B8677A;
+    --accent-2:  #7C8B7F;
+    --accent-soft: #EBD3D8;
+    --line:      #DFD3C4;
+    --white:     #FFFFFF;
+    --radius:    2px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+    font-weight:500;
+  }
+
+  /* ---------- header / hero ---------- */
+  header.hero{
+    max-width:900px;
+    margin:0 auto;
+    padding:5.5rem 1.5rem 3.5rem;
+    text-align:center;
+  }
+  header.hero .eyebrow{ margin-bottom:1.4rem; }
+
+  h1.name{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(2.8rem, 7vw, 5rem);
+    line-height:1.02;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+  h1.name em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--accent);
+  }
+
+  p.role{
+    margin:1.1rem 0 0;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+
+  p.teacher{
+    margin:0.35rem 0 0;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  p.teacher strong{
+    font-weight:500;
+    color:var(--ink);
+  }
+
+  /* ---------- piano illustration ---------- */
+  .piano-wrap{
+    margin:3.2rem auto 0;
+    max-width:560px;
+    padding:0 1.5rem;
+  }
+  .piano-illustration{
+    width:100%;
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 18px 30px -18px rgba(46,42,36,0.45));
+  }
+  .piano-illustration .lid{ fill:var(--ink); opacity:0.92; }
+  .piano-illustration .fallboard{ fill:var(--bg-alt); stroke:var(--line); stroke-width:1; }
+  .piano-illustration .wkey{ fill:var(--white); stroke:var(--line); stroke-width:1; }
+  .piano-illustration .bkey{ fill:var(--ink); }
+  .piano-illustration .wkey:hover{ fill:var(--accent-soft); }
+
+  .hero-divider{ margin-top:3rem; }
+
+  /* ---------- section shell ---------- */
+  section{
+    max-width:900px;
+    margin:0 auto;
+    padding:4rem 1.5rem;
+  }
+  section > .eyebrow{ display:block; text-align:center; margin-bottom:0.6rem; }
+
+  h2.section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    text-align:center;
+    margin:0 0 3rem;
+    color:var(--ink);
+  }
+
+  /* ---------- repertoire grid ---------- */
+  .repertoire{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1.4rem;
+  }
+  @media (max-width:640px){
+    .repertoire{ grid-template-columns:1fr; }
+  }
+
+  .piece{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.9rem 1.8rem 1.7rem;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap:0.55rem;
+    transition:border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .piece:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -18px rgba(46,42,36,0.35);
+  }
+
+  .piece .marking{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.98rem;
+    color:var(--accent);
+  }
+
+  .piece h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0;
+    line-height:1.2;
+  }
+
+  .piece .composer{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+
+  .piece .meta{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    letter-spacing:0.05em;
+    margin-top:0.1rem;
+  }
+
+  .piece .open-btn{
+    margin-top:0.9rem;
+    align-self:flex-start;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    background:none;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:0.55rem 1.1rem;
+    border-radius:var(--radius);
+    cursor:pointer;
+    text-decoration:none;
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .piece .open-btn:hover,
+  .piece .open-btn:focus-visible{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:var(--white);
+  }
+  .piece .open-btn:focus-visible{ outline:2px solid var(--accent-2); outline-offset:2px; }
+  .piece .open-btn svg{ width:14px; height:14px; flex-shrink:0; }
+
+  /* ---------- técnica section (fondo alterno) ---------- */
+  #tecnica{
+    background:var(--bg-alt);
+    max-width:none;
+    padding:4rem 1.5rem;
+  }
+  #tecnica .inner{
+    max-width:900px;
+    margin:0 auto;
+  }
+  #tecnica .repertoire{
+    grid-template-columns:1fr;
+  }
+  #tecnica .piece{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.5rem;
+    flex-wrap:wrap;
+  }
+  #tecnica .piece .info{
+    display:flex;
+    flex-direction:column;
+    gap:0.55rem;
+  }
+  #tecnica .piece .open-btn{ margin-top:0; }
+
+  /* ---------- footer ---------- */
+  footer{
+    text-align:center;
+    padding:3rem 1.5rem 4rem;
+    color:var(--ink-soft);
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .piece{ transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="eyebrow">Piano · Repertorio</span>
+  <h1 class="name">Matías Cortés</h1>
+  <p class="role">Estudiante de piano</p>
+  <p class="teacher">Profesor: <strong>Rodrigo Zamora</strong></p>
+
+  <div class="piano-wrap">
+    <svg class="piano-illustration" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración de un teclado de piano">
+      <rect class="lid" x="0" y="0" width="600" height="12" rx="3"/>
+      <rect class="fallboard" x="0" y="8" width="600" height="8"/>
+      <rect x="0" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="42.86" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="85.71" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="128.57" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="171.43" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="214.29" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="257.14" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="300.00" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="342.86" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="385.71" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="428.57" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="471.43" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="514.29" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="557.14" y="10" width="42.86" height="150" rx="2" class="wkey"/>
+      <rect x="30.43" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="73.29" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="159.00" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="201.86" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="244.71" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="330.43" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="373.29" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="459.00" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="501.86" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+      <rect x="544.71" y="10" width="24.86" height="93.00" rx="1.5" class="bkey"/>
+    </svg>
+  </div>
+</header>
+
+<section id="repertorio">
+  <span class="eyebrow">Lo que está tocando</span>
+  <h2 class="section-title">Repertorio</h2>
+
+  <div class="repertoire">
+
+    <article class="piece">
+      <span class="marking">Allegro</span>
+      <h3>Sonata en Re menor, K. 1 / L. 366</h3>
+      <span class="composer">Domenico Scarlatti</span>
+      <span class="meta">Re menor · 4/4</span>
+      <a class="open-btn" href="Scarlatti-Piano_Sonata_in_d_minor_K__1___L__366-piano.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Andante · Adagio · Presto · Allegretto</span>
+      <h3>Fantasía, KV 397 (385g)</h3>
+      <span class="composer">W. A. Mozart</span>
+      <span class="meta">Re menor</span>
+      <a class="open-btn" href="Mozart-Fantasy_in_d_minor_KV_397__385g_-piano.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Cantabile ♩ = 144</span>
+      <h3>Mazurka, Op. post. 67 No. 2</h3>
+      <span class="composer">Frédéric Chopin</span>
+      <span class="meta">Sol menor · 3/4</span>
+      <a class="open-btn" href="Chopin-Mazurka_in_g_minor_op__67_2-piano.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Tempo giusto</span>
+      <h3>Vals, Op. 64 No. 2</h3>
+      <span class="composer">Frédéric Chopin</span>
+      <span class="meta">Do sostenido menor · 3/4</span>
+      <a class="open-btn" href="Chopin-Waltz_in_c_sharp_minor_op__64_2-piano.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Très modéré</span>
+      <h3>The Little Shepherd, L. 119 (113)</h3>
+      <span class="composer">Claude Debussy</span>
+      <span class="meta">Mi mayor · 4/4</span>
+      <a class="open-btn" href="Debussy-The_Little_Shepherd_L__119__113_-piano.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Andante ♩ = 48–60</span>
+      <h3>Clouds (Piano Pieces for Children)</h3>
+      <span class="composer">Toru Takemitsu</span>
+      <span class="meta">La mayor · 4/8</span>
+      <a class="open-btn" href="Clouds_Toru_Takemitsu_.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Andantino</span>
+      <h3>Aquarium (Le Carnaval des Animaux) — Piano II</h3>
+      <span class="composer">Camille Saint-Saëns</span>
+      <span class="meta">Do mayor · 4/4</span>
+      <a class="open-btn" href="Aquarium.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+    <article class="piece">
+      <span class="marking">Andantino (♪ = 120)</span>
+      <h3>Les Cloches de Las Palmas, Op. 111 No. 4</h3>
+      <span class="composer">Camille Saint-Saëns</span>
+      <span class="meta">6 Études pour le piano, 2e livre · 6/8</span>
+      <a class="open-btn" href="Les_Cloches_de_las_Palmas_etude_op_111.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar partitura
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<section id="tecnica">
+  <div class="inner">
+    <span class="eyebrow">Ejercicios diarios</span>
+    <h2 class="section-title">Técnica</h2>
+
+    <div class="repertoire">
+
+      <article class="piece">
+        <div class="info">
+          <span class="marking">Estudios diarios de técnica</span>
+          <h3>Daily Technical Studies</h3>
+          <span class="composer">Oscar Beringer</span>
+        </div>
+        <a class="open-btn" href="Beringer_Dauily_St.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar
+        </a>
+      </article>
+
+      <article class="piece">
+        <div class="info">
+          <span class="marking">51 ejercicios técnicos</span>
+          <h3>51 Ejercicios, WoO 6</h3>
+          <span class="composer">Johannes Brahms</span>
+        </div>
+        <a class="open-btn" href="Brahms_51_ejercicios_.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar
+        </a>
+      </article>
+
+      <article class="piece">
+        <div class="info">
+          <span class="marking">Fundamentos técnicos</span>
+          <h3>Principios racionales de la técnica pianística</h3>
+          <span class="composer">Alfred Cortot</span>
+        </div>
+        <a class="open-btn" href="Cortot_Principios_.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  Clases de piano · Matías Cortés
+</footer>
+
+</body>
+</html>
